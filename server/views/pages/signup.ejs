@@ -1,0 +1,65 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container">
+  <h1 class="text-center">
+    This is the <span class="text-danger">Sign Up Page</span>
+  </h1>
+  <div class="w-25 mx-auto mt-5">
+    <form action="/login" method="POST" id="form-login">
+      <div class="mb-3">
+        <label class="form-label" for="email">Email</label>
+        <input type="text" id="email" name="email" class="form-control" />
+        <p class="text-danger" id="email-error-message"></p>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+        />
+        <p class="text-danger" id="password-error-message"></p>
+      </div>
+      <div class="form-check mb-3">
+        <input
+          type="checkbox"
+          id="remember"
+          value="Log In"
+          name="remember"
+          class="form-check-input"
+        />
+        <label class="form-check-label" for="remember">Remember me</label>
+      </div>
+      <div class="mb-3 mt-3">
+        <input
+          type="button"
+          id="action-login"
+          value="Log In"
+          name="action-login"
+          class="btn btn-primary w-100"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- handle submission of form -->
+<script>
+  const form = document.querySelector("#form-login");
+  const actionLogin = document.querySelector("#action-login");
+
+  actionLogin.addEventListener("click", (event) => {
+    console.log(
+      `[login.ejs] email is ${form.email.value}, password is ${form.password.value}`
+    );
+    // validate input
+    if (error) {
+      // show error messages
+    } else {
+      form.submit();
+    }
+  });
+</script>
+
+<%- include("../partials/footer.ejs") %>

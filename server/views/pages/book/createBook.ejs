@@ -1,0 +1,215 @@
+<%- include("../../partials/header.ejs") %>
+
+<div class="container">
+  <h1 class="text-center">
+    This is the <span class="text-danger">Create New Users Page</span>
+  </h1>
+  <form
+    class="mt-5 w-75 mx-auto"
+    action=""
+    method="POST"
+    id="form-create-book-post"
+  >
+    <div class="mb-3">
+      <label for="book-title">Title</label>
+      <input
+        class="form-control w-100 my-2"
+        id="book-title"
+        name="book-title"
+        type="text"
+      />
+      <div id="book-title-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="book-summary">Summary</label>
+      <textarea
+        class="form-control w-100 my-2"
+        id="book-summary"
+        name="book-summary"
+        type="textarea"
+      ></textarea>
+      <div id="book-summary-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="book-isbn">ISBN</label>
+      <input
+        class="form-control w-100 my-2"
+        id="book-isbn"
+        name="book-isbn"
+        type="text"
+      />
+      <div id="book-isbn-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="book-genre">Genre</label>
+      <input
+        class="form-control w-100 my-2"
+        id="book-genre"
+        name="book-genre"
+        type="text"
+      />
+      <div class="col error-message text-danger">error message</div>
+    </div>
+    <div class="mb-3">
+      <label for="author-fname">First Name of Author</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-fname"
+        name="author-fname"
+        type="text"
+      />
+      <div id="author-fname-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="author-lname">Last Name of Author</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-lname"
+        name="author-lname"
+        type="text"
+      />
+      <div id="author-lname-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="author-lname">Date of birth</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-dob"
+        name="author-dob"
+        type="date"
+      />
+      <div id="author-dob-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="author-dod">Date of death</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-dod"
+        name="author-dod"
+        type="date"
+      />
+      <div id="author-lname-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <button class="btn btn-primary mt-3 mb-5">Save New Book</button>
+  </form>
+</div>
+
+<!-- handle submission of form -->
+<script>
+  const form = document.querySelector("#form-create-book-post");
+  const title = document.querySelector("#book-title");
+  const titleError = document.querySelector("#book-title ~ .error-message ");
+  const summary = document.querySelector("#book-summary");
+  const summaryError = document.querySelector("#book-summary ~ .error-message");
+  // const author = document.querySelector("#book-author");
+  // const authorError = document.querySelector("#book-author ~ .error-message");
+  const isbn = document.querySelector("#book-isbn");
+  const isbnError = document.querySelector("#book-isbn ~ .error-message");
+  const genre = document.querySelector("#book-genre");
+  const genreError = document.querySelector("#book-genre ~ .error-message");
+
+  // author
+  const fname = document.querySelector("#author-fname");
+  const lname = document.querySelector("#author-lname");
+  const dob = document.querySelector("#author-dob");
+  const dod = document.querySelector("#author-dod");
+
+  // genre
+  const genreName = document.querySelector("#book-genre");
+
+  // read data from localStorage
+  // if (data) {
+  //   console.log(data.title);
+  //   title.value = data.title.value;
+  //   summary.value = data.summary.value;
+  //   author.value = data.summary.value;
+  //   isbn.value = data.isbn.value;
+  //   genre.value = data.genre.value;
+  // } else {
+  //   console.log(`[createBook.ejs] data is null`);
+  // }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = {
+      title: title.value,
+      summary: summary.value,
+      // author: author.value,
+      isbn: isbn.value,
+      genre: genre.value,
+    };
+    // validate input
+    error = false;
+    if (error) {
+      // show error messages
+      console.log("error block called");
+    } else {
+      try {
+        const resAuthorAPI = await fetch("/api/author", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            first_name: fname.value,
+            last_name: lname.value,
+            date_of_birth: dob.value,
+            date_of_death: dod.value,
+          }),
+        });
+        if (!resAuthorAPI) throw Error("Fail to find / create the author");
+        const author = await resAuthorAPI.json();
+        data.author = author.id;
+
+        const resGenreAPI = await fetch("/api/genre", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: genreName.value,
+          }),
+        });
+        if (!resGenreAPI) throw Error("Fail to find / create the genre");
+        const genre = await resGenreAPI.json();
+        data.genre = genre.id;
+
+        const resp = await fetch("/api/book", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (resp.ok && resp.status === 200) {
+          const responseBook = await resp.json();
+          window.location.href = "/api/books";
+        }
+      } catch (error) {
+        const alertElement = document.createElement("div");
+        alertElement.textContent = error.message;
+        alertElement.className = "container bg-warning text-danger";
+        form.insertBefore(alertElement, form.querySelector("button"));
+        setTimeout(() => alertElement.remove(), 8000);
+      }
+    }
+  });
+</script>
+
+<%- include("../../partials/footer.ejs") %>

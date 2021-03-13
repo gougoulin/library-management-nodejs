@@ -1,0 +1,65 @@
+<%- include("../../partials/header.ejs") %>
+
+<div class="container">
+  <h1 class="text-center">
+    This is the <span class="text-danger">Create New Genre Page</span>
+  </h1>
+  <form
+    class="mt-5 w-75 mx-auto"
+    action=""
+    method="POST"
+    id="form-create-book-post"
+  >
+    <div class="mb-3">
+      <label for="genre-name">Name</label>
+      <input
+        class="form-control w-100 my-2"
+        id="genre-name"
+        name="genre-name"
+        type="text"
+      />
+      <div id="genre-name-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <button class="btn btn-primary mt-3 mb-5">Save Genre</button>
+  </form>
+</div>
+
+<!-- handle submission of form -->
+<script>
+  const genreName = document.querySelector("#genre-name");
+  const form = document.querySelector("form");
+  const req = async () => {
+    try {
+      const url = "/api/genre";
+      // validate input first
+      // to be complete
+
+      // if valid
+      if (true) {
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            name: genreName.value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok && response.status === 200) {
+          const data = await response.json();
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  form.addEventListener("submit", (event) => {
+    console.log("function called");
+    event.preventDefault();
+    req();
+  });
+</script>
+
+<%- include("../../partials/footer.ejs") %>

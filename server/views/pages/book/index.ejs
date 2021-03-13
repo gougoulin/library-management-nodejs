@@ -1,0 +1,87 @@
+<%- include("../../partials/header.ejs") %>
+
+<div class="container-fluid">
+  <div class="row">
+    <%- include("../../partials/sidebar.ejs"); %>
+    <div class="col-9">
+      <h1 class="text-center">
+        This is the <span class="text-danger">Dashboard</span>
+      </h1>
+      <div id="content"><%- include("../../partials/loading.ejs"); %></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const container = document.querySelector("#content");
+  const url = "/api/books";
+
+  const makeTableItem = (indx, data) => {
+    const name = data.genre ? data.genre.name : "error";
+    return `<tr><th scope='row'>${indx}</th><td>${data.title}</td><td>${
+      data.author.first_name + ", " + data.author.last_name
+    }</td><td>${name}</td><td><a class='btn btn-outline-success btn-sm' href='/book/${
+      data._id
+    }' >View</a><a class='btn btn-outline-danger btn-sm ms-3 delete' href='/api/book?id=${
+      data._id
+    }' >Delete</a><a class='btn btn-outline-primary btn-sm ms-3 add-book' href='/api/book?id=${
+      data._id
+    }' >Add Book</a></td></tr>`;
+  };
+
+  const stringLeft =
+    "<table class='table'><thead><tr><th scope='col'>Index</th><th scope='col'>Title</th><th scope='col'>Author</th><th scope='col'>Genre</th><th scope='col'>Operation</th></tr></thead><tbody>";
+
+  const stringRight = "</tbody></table>";
+
+  const makeTableHead = () => {};
+
+  const getAndDisplayDate = async () => {
+    try {
+      const resp = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.ok && resp.status === 200) {
+        const data = await resp.json();
+        if (data.data.length < 1) {
+          container.innerHTML =
+            "<h3 class='bg-info px-3 py-3'>There are 0 books.</h3>";
+        } else {
+          let result = stringLeft;
+          const dataStrings = data.data.map((item, idx) => {
+            return makeTableItem(idx, item);
+          });
+          const stringCenter = dataStrings.reduce((prev, curr) => prev + curr);
+          result += stringCenter + stringRight;
+          container.innerHTML = result;
+
+          // container.innerHTML = stringLeft + stringRight;
+          //   "<div class='container bg-info'><p class='text-wrap'>" +
+          //   JSON.stringify(data.data);
+          // +"</p></div>" ;
+
+          const deleteLinks = document.querySelectorAll(".delete");
+          deleteLinks.forEach((link) => {
+            link.addEventListener("click", async (event) => {
+              event.preventDefault();
+              const res = await fetch(event.target.href, { method: "DELETE" });
+              if (res) {
+                window.location.href = "/books";
+              }
+            });
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      container.innerHTML = error.message;
+    }
+  };
+
+  getAndDisplayDate();
+</script>
+
+<%- include("../../partials/footer.ejs") %>

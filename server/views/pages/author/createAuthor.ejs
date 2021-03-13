@@ -1,0 +1,123 @@
+<%- include("../../partials/header.ejs") %>
+
+<div class="container">
+  <h1 class="text-center">
+    This is the <span class="text-danger">Create New Author Page</span>
+  </h1>
+  <form
+    class="mt-5 w-75 mx-auto"
+    action=""
+    method="POST"
+    id="form-create-book-post"
+  >
+    <div class="mb-3">
+      <label for="author-fname">First Name</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-fname"
+        name="author-fname"
+        type="text"
+      />
+      <div id="author-fname-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="author-lname">Last Name</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-lname"
+        name="author-lname"
+        type="text"
+      />
+      <div id="author-lname-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="author-lname">Date of birth</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-dob"
+        name="author-dob"
+        type="date"
+      />
+      <div id="author-dob-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="author-dod">Date of death</label>
+      <input
+        class="form-control w-100 my-2"
+        id="author-dod"
+        name="author-dod"
+        type="date"
+      />
+      <div id="author-lname-error" class="col error-message text-danger">
+        error message
+      </div>
+    </div>
+    <button class="btn btn-primary mt-3 mb-5">Save New Author</button>
+  </form>
+</div>
+
+<!-- handle submission of form -->
+<script>
+  const genreName = document.querySelector("#genre-name");
+  const fname = document.querySelector("#author-fname");
+  const lname = document.querySelector("#author-lname");
+  const dob = document.querySelector("#author-dob");
+  const dod = document.querySelector("#author-dod");
+  const form = document.querySelector("form");
+
+  const req = async () => {
+    try {
+      const url = "/api/author";
+      // validate input first
+      // to be complete
+
+      console.log({
+        first_name: fname.value,
+        last_name: lname.value,
+        date_of_birth: dob.value,
+        date_of_death: dod.value,
+      });
+
+      // if valid
+      if (true) {
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            first_name: fname.value,
+            last_name: lname.value,
+            date_of_birth: dob.value,
+            date_of_death: dod.value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok && response.status === 200) {
+          const data = await response.json();
+          if (data.msg.includes("author exist")) {
+            console.log(`author exists. author id is ${data.id}`);
+          } else if (data.msg.includes("author created")) {
+            console.log(`author created with ID ${data.id}`);
+          } else {
+            throw Error("Error in creating new author");
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    req();
+  });
+</script>
+
+<%- include("../../partials/footer.ejs") %>

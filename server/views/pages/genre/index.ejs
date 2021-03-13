@@ -1,0 +1,46 @@
+<%- include("../../partials/header.ejs") %>
+
+<div class="container">
+  <h1 class="text-center">
+    This is the <span class="text-danger">Books List Page</span>
+  </h1>
+  <div id="container" class="container">
+    <h3 class="display-2 text-center mt-5">Loading ...</h3>
+    <div class="d-flex justify-content-center mt-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- handle submission of form -->
+<script>
+  const container = document.querySelector("#container");
+  const url = "/api/authors";
+
+  const getAndDisplayDate = async () => {
+    try {
+      const resp = await fetch(url, {
+        method: "GET",
+      });
+      if (resp.ok && resp.status === 200) {
+        const data = await resp.json();
+        if (data.data.length < 1) {
+          container.innerHTML =
+            "<h3 class='bg-info px-3 py-3'>There are 0 books.</h3>";
+        } else {
+          container.innerHTML =
+            "<h3 class='bg-success px-3 py-3'>Date Fetched</h3>";
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      container.innerHTML = error.message;
+    }
+  };
+
+  getAndDisplayDate();
+</script>
+
+<%- include("../../partials/footer.ejs") %>
