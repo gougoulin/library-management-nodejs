@@ -5,6 +5,10 @@
 
 /server/node_modules
 
+# config
+/configs/config.js
+/configs/passport.js
+
 /sub-projects
 /sub-projects/node_modules
 

@@ -7,7 +7,7 @@ module.exports = {
   jwt: {
     secret: "this is a test secret",
     options: {
-      expiresIn: "1h",
+      expiresIn: "10h",
     },
   },
 };
