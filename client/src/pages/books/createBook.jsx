@@ -94,7 +94,7 @@ const CreateBook = () => {
   const main = (
     <>
       <h3 className="text-center mt-3 mb-3">
-        This is the <span className="text-danger">Create New Users Page</span>
+        <span className="text-primary">Create New Book</span>
       </h3>
       <form className="mt-5 w-50 mx-auto" id="form-create-book-post">
         <div className="mb-3">

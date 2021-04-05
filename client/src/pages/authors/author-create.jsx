@@ -63,7 +63,7 @@ const CreateAuthor = () => {
   const main = (
     <>
       <h3 className="text-center mt-3 mb-3">
-        <span className="text-danger">Create New Author</span>
+        <span className="text-primary">Create New Author</span>
       </h3>
       <div className="bg-warning text-center text-danger">
         {state.errors.general}
