@@ -2,6 +2,8 @@
 
 ### How to use
 
+Before using this demo, you need to have a mongodb atlas account and set up a database.
+
 1. clone the project
 2. cd /server and run "npm install"
 3. cd /client and run "npm install" to install the dependent packages
