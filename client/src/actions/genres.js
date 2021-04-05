@@ -1,11 +1,19 @@
 import * as api from "../api/";
-import { GET_GENRES, GET_GENRE_DETAIL, POST_GENRES } from "./constants";
+import {
+  GET_GENRES,
+  GET_GENRE_DETAIL,
+  LOADING_FAIL,
+  LOADING_START,
+  POST_GENRES,
+} from "./constants";
 
 export const getGenres = () => async (dispatch) => {
   try {
+    dispatch({ type: LOADING_START });
     const data = await api.getGenres();
     dispatch({ type: GET_GENRES, payload: data });
   } catch (error) {
+    dispatch({ type: LOADING_FAIL });
     console.log(error);
   }
 };

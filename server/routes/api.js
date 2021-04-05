@@ -47,13 +47,13 @@ ApiRouter.delete("/authors/:id", authorController.deleteAuthor);
  */
 // list all books
 ApiRouter.get("/bookinstances", bookInstanceController.getBookInstances);
-// POST create a new bookinstance
+// // POST create a new bookinstance
 ApiRouter.post("/bookinstance", bookInstanceController.postBookInstance);
-// display bookinstance details
+// // display bookinstance details
 ApiRouter.get("/bookinstance", bookInstanceController.getBookInstance);
-// update bookinstance details by send data
-ApiRouter.put("/bookinstance", bookInstanceController.putBookInstance);
-// delete bookinstance
+// // update bookinstance details by send data
+ApiRouter.put("/bookinstance", bookInstanceController.updateBookInstance);
+// // delete bookinstance
 ApiRouter.delete("/bookinstance", bookInstanceController.deleteBookInstance);
 
 /**

@@ -25,7 +25,7 @@ const Authors = () => {
   );
   return (
     <>
-      <MainLayout main={main} />
+      <MainLayout>{main}</MainLayout>
     </>
   );
 };

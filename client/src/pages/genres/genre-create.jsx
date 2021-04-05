@@ -71,7 +71,7 @@ const CreateGenre = () => {
   );
   return (
     <>
-      <MainLayout main={main} />
+      <MainLayout>{main}</MainLayout>
     </>
   );
 };

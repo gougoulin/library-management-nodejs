@@ -25,7 +25,7 @@ const Genres = () => {
   );
   return (
     <>
-      <MainLayout main={main} />
+      <MainLayout>{main}</MainLayout>
     </>
   );
 };

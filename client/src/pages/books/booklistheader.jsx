@@ -4,9 +4,9 @@ const BookListHeader = () => {
   return (
     <>
       <div className="row py-3 me-3">
-        <div className="col-1">
+        {/* <div className="col-1">
           <strong>#</strong>
-        </div>
+        </div> */}
         <div className="col-2">
           <strong>Title</strong>
         </div>
@@ -19,7 +19,7 @@ const BookListHeader = () => {
         <div className="col-2">
           <strong>Genre</strong>
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <strong>Actions</strong>
         </div>
       </div>

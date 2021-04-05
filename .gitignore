@@ -5,4 +5,9 @@
 
 /server/node_modules
 
+/sub-projects
 /sub-projects/node_modules
+
+/server/.env
+
+/server/configs/config.js

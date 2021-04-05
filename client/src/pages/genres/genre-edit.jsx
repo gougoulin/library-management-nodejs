@@ -71,7 +71,7 @@ const GenreDetail = () => {
   );
   return (
     <>
-      <MainLayout main={main} />
+      <MainLayout>{main}</MainLayout>
     </>
   );
 };

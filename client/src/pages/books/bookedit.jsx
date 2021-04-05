@@ -93,7 +93,7 @@ const BookDetail = () => {
   );
   return (
     <>
-      <MainLayout main={main} />
+      <MainLayout>{main}</MainLayout>
     </>
   );
 };

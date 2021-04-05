@@ -16,6 +16,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import RouteGuard from "./components/routeGuard";
+import Users from "./pages/users";
+import CreateUser from "./pages/users/user-create";
+import BookInstanceList from "./pages/bookinstances/";
+import SingleBookInstanceList from "./pages/bookinstances/singlebookinstancelist";
+import UpdateBookInstance from "./pages/bookinstances/bookinstanceedit";
+import SingleBookInstance from "./pages/bookinstances/singlebookinstance";
+import CreateBookInstance from "./pages/bookinstances/createbookinstance";
+import PageNotFound from "./pages/404.jsx";
 
 function App() {
   return (
@@ -26,7 +34,7 @@ function App() {
           <CreateBook />
         </RouteGuard>
         {/* <Route exact path="/books" component={Books} /> */}
-        <RouteGuard path="/books">
+        <RouteGuard exact path="/books">
           <Books />
         </RouteGuard>
         {/* <Route exact path="/books/:id/edit" component={UpdateBook} /> */}
@@ -37,6 +45,23 @@ function App() {
         <RouteGuard exact path="/books/:id">
           <BookDetail />
         </RouteGuard>
+
+        <RouteGuard exact path="/bookinstances">
+          <BookInstanceList />
+        </RouteGuard>
+        <RouteGuard exact path="/books/:bookid/bookinstances">
+          <SingleBookInstanceList />
+        </RouteGuard>
+        <RouteGuard exact path="/books/:bookid/bookinstances/create">
+          <CreateBookInstance />
+        </RouteGuard>
+        <RouteGuard exact path="/books/:bookid/bookinstances/:id">
+          <SingleBookInstance />
+        </RouteGuard>
+        <RouteGuard exact path="/books/:bookid/bookinstances/:id/edit">
+          <UpdateBookInstance />
+        </RouteGuard>
+
         {/* <Route exact path="/authors/:id/edit" component={AuthorEdit} /> */}
         <RouteGuard exact path="/authors/:id/edit">
           <AuthorEdit />
@@ -69,12 +94,22 @@ function App() {
         <RouteGuard exact path="/genres">
           <Genres />
         </RouteGuard>
+        <RouteGuard exact path="/users">
+          <Users />
+        </RouteGuard>
+        <RouteGuard exact path="/users/create">
+          <CreateUser />
+        </RouteGuard>
+
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        {/* <Route exact path="/" component={Home} /> */}
-        <RouteGuard exact path="/">
+        <Route exact path="/" component={Home} />
+        {/* <RouteGuard exact path="/">
           <Home />
-        </RouteGuard>
+        </RouteGuard> */}
+        <Route path="*">
+          <PageNotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

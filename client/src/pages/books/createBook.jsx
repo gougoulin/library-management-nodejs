@@ -106,9 +106,9 @@ const CreateBook = () => {
             name="book-title"
             type="text"
           />
-          <div id="book-title-error" className="col error-message text-danger">
+          {/* <div id="book-title-error" className="col error-message text-danger">
             error message
-          </div>
+          </div> */}
         </div>
 
         <div className="mb-3">
@@ -120,12 +120,12 @@ const CreateBook = () => {
             name="book-summary"
             type="textarea"
           ></textarea>
-          <div
+          {/* <div
             id="book-summary-error"
             className="col error-message text-danger"
           >
             error message
-          </div>
+          </div> */}
         </div>
         <div className="mb-3">
           <label for="book-isbn">ISBN</label>
@@ -136,9 +136,9 @@ const CreateBook = () => {
             name="book-isbn"
             type="text"
           />
-          <div id="book-isbn-error" className="col error-message text-danger">
+          {/* <div id="book-isbn-error" className="col error-message text-danger">
             error message
-          </div>
+          </div> */}
         </div>
         <div className="mb-3">
           <label for="book-genre">Genre</label>
@@ -149,7 +149,7 @@ const CreateBook = () => {
             name="book-genre"
             type="text"
           />
-          <div className="col error-message text-danger">error message</div>
+          {/* <div className="col error-message text-danger">error message</div> */}
         </div>
         <div className="mb-3">
           <label for="author-fname">First Name of Author</label>
@@ -160,12 +160,12 @@ const CreateBook = () => {
             name="author-fname"
             type="text"
           />
-          <div
+          {/* <div
             id="author-fname-error"
             className="col error-message text-danger"
           >
             error message
-          </div>
+          </div> */}
         </div>
         <div className="mb-3">
           <label for="author-lname">Last Name of Author</label>
@@ -176,12 +176,12 @@ const CreateBook = () => {
             name="author-lname"
             type="text"
           />
-          <div
+          {/* <div
             id="author-lname-error"
             className="col error-message text-danger"
           >
             error message
-          </div>
+          </div> */}
         </div>
         <div className="mb-3">
           <label for="author-lname">Date of birth</label>
@@ -192,9 +192,9 @@ const CreateBook = () => {
             name="author-dob"
             type="date"
           />
-          <div id="author-dob-error" className="col error-message text-danger">
+          {/* <div id="author-dob-error" className="col error-message text-danger">
             error message
-          </div>
+          </div> */}
         </div>
         <div className="mb-3">
           <label for="author-dod">Date of death</label>
@@ -205,12 +205,12 @@ const CreateBook = () => {
             name="author-dod"
             type="date"
           />
-          <div
+          {/* <div
             id="author-lname-error"
             className="col error-message text-danger"
           >
             error message
-          </div>
+          </div> */}
         </div>
         <button onClick={handleSubmit} className="btn btn-primary mt-3 mb-5">
           Save New Book
@@ -220,7 +220,7 @@ const CreateBook = () => {
   );
   return (
     <>
-      <MainLayout main={main} />
+      <MainLayout>{main}</MainLayout>
     </>
   );
 };

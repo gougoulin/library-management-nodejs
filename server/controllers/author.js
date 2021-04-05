@@ -5,16 +5,19 @@ const getAuthors = async (req, res) => {
   try {
     const authors = await Author.find({}).exec();
     if (!authors) throw Error("Can't fetch authors from database");
+    console.log(`server [author.js]`, authors);
     const extendedAuthors = authors.map((author) => {
       return {
         id: author._id,
         name: author.name,
-        lifespan: author.lifespan,
+        // lifespan: author.lifespan,
         url: author.url,
       };
     });
+    console.log(`server [author.js]`, extendedAuthors);
     res.status(200).json(extendedAuthors);
   } catch (error) {
+    console.log(`server [author.js]`, error);
     res.status(500).json({ msg: "Server error." });
   }
 };

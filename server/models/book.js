@@ -11,11 +11,12 @@ const BookSchema = new mongoose.Schema({
   },
   summary: { type: String, required: true },
   isbn: { type: String, required: true, unique: true },
-  genre: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "genre",
-    required: true,
-  },
+  genre: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "genre",
+    },
+  ],
 
   /**
    * private virtual properties

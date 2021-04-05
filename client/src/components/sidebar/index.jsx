@@ -4,34 +4,44 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <>
-      <ul className="nav flex-column mt-5">
+      <ul className="nav flex-column mt-3">
+        <li className="nav-item">
+          <Link className="nav-link" to="/">
+            Dashboard
+          </Link>
+        </li>
+        {/* <li className="nav-item">
+          <Link className="nav-link" to="/users">
+            All users
+          </Link>
+        </li> */}
         <li className="nav-item">
           <Link className="nav-link" to="/books">
-            Books
+            All books
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/authors">
-            Authors
+            All authors
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/genres">
-            Genres
+            Al genres
           </Link>
         </li>
         <li className="nav-item">
-          <Link
-            className="nav-link disabled"
-            to="#"
-            tabindex="-1"
-            aria-disabled="true"
-          >
-            Disabled
+          <Link className="nav-link" to="/bookinstances">
+            All book instances
           </Link>
         </li>
       </ul>
-      <ul className="nav flex-column mt-5">
+      <ul className="nav flex-column mt-3">
+        {/* <li className="nav-item">
+          <Link className="nav-link" to="/users/create">
+            Create New User
+          </Link>
+        </li> */}
         <li className="nav-item">
           <Link
             className="nav-link active"
@@ -39,11 +49,6 @@ const Sidebar = () => {
             to="/books/create"
           >
             Create New Book
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/bookinstances/create">
-            Create Book Instance
           </Link>
         </li>
         <li className="nav-item">
@@ -56,11 +61,12 @@ const Sidebar = () => {
             Create New Genre
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/users/create">
-            Create New User
+        {/* move to book list item - actions  */}
+        {/* <li className="nav-item">
+          <Link className="nav-link" to="/bookinstances/create">
+            Create new Book Instance
           </Link>
-        </li>
+        </li> */}
       </ul>
     </>
   );

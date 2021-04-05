@@ -17,13 +17,15 @@ const AuthorSchema = new mongoose.Schema({
 });
 
 AuthorSchema.virtual("name").get(function () {
-  return `${this.first_name}, ${this.last_name}`;
+  const fname = this.first_name || "";
+  const lname = this.last_name ? `, ${this.last_name}` : "";
+  return `${fname}${lname}`;
 });
 
 AuthorSchema.virtual("lifespan").get(function () {
-  const birth = this.date_of_birth.getFullYear();
-  const death = this.date_of_death.getFullYear();
-  return `${birth} - ${death}`;
+  const birth = this.date_of_birth.getYear();
+  const death = this.date_of_death.getYear();
+  return `${birth} - ${death}`.toString();
 });
 
 AuthorSchema.virtual("url").get(function () {

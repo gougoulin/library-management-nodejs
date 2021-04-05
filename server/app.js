@@ -12,6 +12,8 @@ const ExpressJWT = require("express-jwt");
 const apiRouter = require("./routes/api");
 
 var app = express();
+// connect database
+require("./configs/mongoose");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -25,12 +27,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use(
   ExpressJWT({ secret: configs.jwt.secret, algorithms: ["HS256"] }).unless({
-    path: ["/users/login"],
+    path: ["/users/login", "/users/signup"],
   })
 );
-// connect database
-require("./configs/mongoose");
-
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/api", apiRouter);

@@ -36,6 +36,7 @@ exports.signup = async (req, res) => {
       config.jwt.secret,
       config.jwt.options
     );
+    console.log(token);
     res.status(201).json({ token });
   } catch (error) {
     res.status(500).json({ err: error.message });

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./header";
 import Sidebar from "./sidebar";
 
-const MainLayout = ({ main }) => {
+const MainLayout = ({ children }) => {
   return (
     <>
       <div className="container-fluid">
@@ -13,7 +13,7 @@ const MainLayout = ({ main }) => {
           <div className="col-2">
             <Sidebar />
           </div>
-          <div className="col-10">{main}</div>
+          <div className="col-10">{children}</div>
         </div>
       </div>
     </>

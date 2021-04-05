@@ -1,24 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { deleteAuthor } from "../../actions/authors";
 
 const AuthorListItem = ({ author, indx }) => {
   const history = useHistory();
-
-  const { name, lifespan, url, id } = author;
+  const dispatch = useDispatch();
+  const { lifespan, url, id } = author;
+  const name = author.name;
   // send delete request
   const handleDelete = async () => {
-    try {
-      const res = await fetch(`http://localhost:5000/api/authors/${id}`, {
-        method: "DELETE",
-      });
-      if (res.ok && res.status === 200) {
-        history.push("/");
-      } else if (res.status === 409) {
-        throw Error("Can't delete. Delete author's books first.");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch(deleteAuthor(id));
   };
   return (
     <div className="py-3 border-bottom row align-items-center">

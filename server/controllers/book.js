@@ -4,11 +4,11 @@ const getBooks = async (req, res) => {
   try {
     const allBooks = await Book.find({}).populate("genre").populate("author");
     if (allBooks) {
-      res.status(201).json(allBooks);
+      res.status(200).json(allBooks);
     }
   } catch (error) {
-    res.status(500).json({ msg: error.message });
     console.log(error);
+    res.status(500).json({ msg: error.message });
   }
 };
 
